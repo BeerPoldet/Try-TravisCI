@@ -1,0 +1,5 @@
+language: objective-c
+osx_image: xcode10.1
+xcode_project: Try-TravisCI.xcodeproj
+xcode_scheme: Try-TravisCI
+xcode_destination: platform=iOS Simulator,OS=11.3,name=iPhone XS
