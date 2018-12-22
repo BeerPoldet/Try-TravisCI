@@ -6,6 +6,7 @@ xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone XS
 
 before_install:
   - gem install xcpretty
+  - gem install xcpretty-travis-formatter
 
 before_script:
 - "./scripts/add-key.sh"
