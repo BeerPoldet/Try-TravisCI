@@ -1,5 +1,7 @@
 #!/bin/sh
 
+chmod a-w /Users/travis/Library/Developer/Xcode/DerivedData/
+
 xcodebuild $XCODE_ROOT \
   -scheme $XCODE_SCHEME \
   -sdk iphonesimulator \
