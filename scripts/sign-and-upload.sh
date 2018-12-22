@@ -25,6 +25,6 @@ echo ""
 echo "**********************************"
 echo "* Uploading to App Store Connect *"
 echo "**********************************"
-mv .itmstransporter/ .old_itmstransporter/
+mv ~/.itmstransporter/ ~/.old_itmstransporter/
 altool --validate-app -f "$BUILDDIR/$XCODE_SCHEME.ipa" -t ios -u $APP_STORE_CONNECT_USERNAME -p $APP_STORE_CONNECT_PASSWORD
 altool --upload-app -f "$BUILDDIR/$XCODE_SCHEME.ipa" -t ios -u $APP_STORE_CONNECT_USERNAME -p $APP_STORE_CONNECT_PASSWORD
