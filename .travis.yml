@@ -3,27 +3,39 @@ osx_image: xcode10.1
 xcode_project: Try-TravisCI.xcodeproj
 xcode_scheme: Try-TravisCI
 xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone XS
+
+before_install:
+  - gem install xcpretty
+  - gem install xcpretty-travis-formatter
+
 before_script:
-- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/profile/TryTravisCI.mobileprovision.enc
-  -d -a -out scripts/profile/TryTravisCI.mobileprovision
-- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d -a
-  -out scripts/certs/dist.cer
-- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a
-  -out scripts/certs/dist.p12
 - "./scripts/add-key.sh"
-- "./scripts/update-bundle.sh"
-script:
-- xcodebuild -project Try-TravisCI.xcodeproj/ -scheme Try-TravisCI -sdk iphoneos -configuration
-  Release OBJROOT=$PWD/build SYMROOT=$PWD/build ONLY_ACTIVE_ARCH=NO 'CODE_SIGN_RESOURCE_RULES_PATH=$(SDKROOT)/ResourceRules.plist'
-after_success:
-- "./scripts/sign-and-upload.sh"
-after_script:
-- "./scripts/remove-key.sh"
+
+stages:
+  - test
+  - name: deploy
+    if: branch = release
+
+jobs:
+  include:
+    - stage: deploy
+      before_script:
+      - "./scripts/update-bundle.sh"
+      script:
+      - "./scripts/build.sh"
+      after_success:
+      - "./scripts/sign-and-upload.sh"
+      after_script:
+      - "./scripts/remove-key.sh"
+    - stage: test
+      script: "./scripts/test.sh"
+
 env:
   global:
   - APP_NAME="TryTravis"
   - 'DEVELOPER_NAME="iPhone Distribution: Poldet Assanangkornchai (F6395XL53N)"'
   - PROFILE_NAME="TryTravisCI"
+  - XCODE_ROOT="-project Try-TravisCI.xcodeproj"
   - XCODE_PROJECT="Try-TravisCI.xcodeproj"
   - XCODE_SCHEME="Try-TravisCI"
   - INFO_PLIST="Try-TravisCI/Info.plist"
