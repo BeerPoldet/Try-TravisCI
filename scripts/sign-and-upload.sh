@@ -3,8 +3,8 @@ if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then
   echo "This is a pull request. No deployment will be done."
   exit 0
 fi
-if [[ "$TRAVIS_BRANCH" != "release" ]]; then
-  echo "Testing on a branch other than release. No deployment will be done."
+if [[ "$TRAVIS_BRANCH" != "master" ]]; then
+  echo "Testing on a branch other than master. No deployment will be done."
   exit 0
 fi
 
