@@ -11,7 +11,7 @@ before_install:
 stages:
   - test
   - name: deploy
-    if: branch = release
+    if: branch = master
 
 jobs:
   include:
