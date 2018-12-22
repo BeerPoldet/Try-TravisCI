@@ -1,6 +1,7 @@
 #!/bin/sh
 
-chmod a-w /Users/travis/Library/Developer/Xcode/DerivedData/
+chmod a-w ~/Library/Developer/Xcode/
+chmod a-w ~/Library/Developer/Xcode/DerivedData
 
 xcodebuild $XCODE_ROOT \
   -scheme $XCODE_SCHEME \
