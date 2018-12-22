@@ -11,6 +11,7 @@ before_script:
 - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a
   -out scripts/certs/dist.p12
 - "./scripts/add-key.sh"
+- "./scripts/update-bundle.sh"
 script:
 - xcodebuild -project Try-TravisCI.xcodeproj/ -scheme Try-TravisCI -sdk iphoneos -configuration
   Release OBJROOT=$PWD/build SYMROOT=$PWD/build ONLY_ACTIVE_ARCH=NO 'CODE_SIGN_RESOURCE_RULES_PATH=$(SDKROOT)/ResourceRules.plist'
