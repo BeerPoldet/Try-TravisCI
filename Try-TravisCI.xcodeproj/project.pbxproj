@@ -10,10 +10,10 @@
 		05ED19A021CCE80900AFA043 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05ED199F21CCE80900AFA043 /* AppDelegate.swift */; };
 		05ED19A221CCE80900AFA043 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05ED19A121CCE80900AFA043 /* ViewController.swift */; };
 		05ED19A521CCE80900AFA043 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05ED19A321CCE80900AFA043 /* Main.storyboard */; };
-		05ED19A721CCE80C00AFA043 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05ED19A621CCE80C00AFA043 /* Assets.xcassets */; };
 		05ED19AA21CCE80C00AFA043 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05ED19A821CCE80C00AFA043 /* LaunchScreen.storyboard */; };
 		05ED19B521CCE80C00AFA043 /* Try_TravisCITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05ED19B421CCE80C00AFA043 /* Try_TravisCITests.swift */; };
 		05ED19C021CCE80C00AFA043 /* Try_TravisCIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05ED19BF21CCE80C00AFA043 /* Try_TravisCIUITests.swift */; };
+		05ED19CF21CE2A8E00AFA043 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05ED19CE21CE2A8E00AFA043 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +38,6 @@
 		05ED199F21CCE80900AFA043 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05ED19A121CCE80900AFA043 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		05ED19A421CCE80900AFA043 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		05ED19A621CCE80C00AFA043 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05ED19A921CCE80C00AFA043 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		05ED19AB21CCE80C00AFA043 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05ED19B021CCE80C00AFA043 /* Try-TravisCITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Try-TravisCITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +46,7 @@
 		05ED19BB21CCE80C00AFA043 /* Try-TravisCIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Try-TravisCIUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05ED19BF21CCE80C00AFA043 /* Try_TravisCIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Try_TravisCIUITests.swift; sourceTree = "<group>"; };
 		05ED19C121CCE80C00AFA043 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05ED19CE21CE2A8E00AFA043 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +100,8 @@
 				05ED199F21CCE80900AFA043 /* AppDelegate.swift */,
 				05ED19A121CCE80900AFA043 /* ViewController.swift */,
 				05ED19A321CCE80900AFA043 /* Main.storyboard */,
-				05ED19A621CCE80C00AFA043 /* Assets.xcassets */,
 				05ED19A821CCE80C00AFA043 /* LaunchScreen.storyboard */,
+				05ED19CE21CE2A8E00AFA043 /* Assets.xcassets */,
 				05ED19AB21CCE80C00AFA043 /* Info.plist */,
 			);
 			path = "Try-TravisCI";
@@ -235,7 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05ED19AA21CCE80C00AFA043 /* LaunchScreen.storyboard in Resources */,
-				05ED19A721CCE80C00AFA043 /* Assets.xcassets in Resources */,
+				05ED19CF21CE2A8E00AFA043 /* Assets.xcassets in Resources */,
 				05ED19A521CCE80900AFA043 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
