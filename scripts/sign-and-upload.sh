@@ -31,4 +31,4 @@ echo "* Uploading to App Store Connect *"
 echo "**********************************"
 
 export PATH="$PATH:/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Support/altool"
-altool --upload-app -f "$OUTPUTDIR/$APP_NAME.ipa" -u $APP_STORE_CONNECT_USERNAME -p $APP_STORE_CONNECT_PASSWORD
+'/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Support/altool' --upload-app -f "$OUTPUTDIR/$APP_NAME.ipa" -u $APP_STORE_CONNECT_USERNAME -p $APP_STORE_CONNECT_PASSWORD
