@@ -3,3 +3,23 @@ osx_image: xcode10.1
 xcode_project: Try-TravisCI.xcodeproj
 xcode_scheme: Try-TravisCI
 xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone XS
+
+before_script:
+- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/profile/TryTravisCI.mobileprovision.enc -d -a -out scripts/profile/TryTravisCI.mobileprovision
+- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d -a -out scripts/certs/dist.cer
+- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a -out scripts/certs/dist.p12
+- ./scripts/add-key.sh
+script:
+- xcodebuild -project Try-TravisCI.xcodeproj/ -scheme Try-TravisCI -sdk iphoneos -configuration Release OBJROOT=$PWD/build SYMROOT=$PWD/build ONLY_ACTIVE_ARCH=NO 'CODE_SIGN_RESOURCE_RULES_PATH=$(SDKROOT)/ResourceRules.plist'
+after_success:
+- ./scripts/sign-and-upload.sh
+after_script:
+- ./scripts/remove-key.sh
+
+env:
+  global:
+  - APP_NAME="TryTravis"
+  - 'DEVELOPER_NAME="iPhone Distribution: Poldet Assanangkornchai (F6395XL53N)"'
+  - PROFILE_NAME="TryTravisCI"
+  - secure: bbsxrVIN7ic0ZdUVbom/Sb4QAq0gJwjht9/E5526e9K8zkp/Ag1xdkY4z8rEYba+qrE7Ag0hUoqdN/jqHPoRBC9mHMGXrw5ZWNpb9UxdV0jcpRbNoGp9jqHbVxdLgG/8jLWYSSL4FFk0UDFYTabKaczMbVB3f7hnlkEc4i7X2weuRu2DI37kn8Fd20TaSKxKb8GG+55Q6U7YJA9xET7U3lrh5fPt14+QIBoVy14+xrGANvCzPTNQvJYghsyc5d3/dOBkfq1TBmABwx40wZyiW1/hrsw40XE5XmzWBO/0/GK4JqYydEsC5li8+UMPxb2wEbQofwYiNMdPeshLG0r6woxeBV0Le7xYSGxER4QgBphSjOOVncYLHMIc1OJeEcXs3c2ReBHezexJDoOUaiLWoqKmzhfghTRpGUCM9S/m5uNIacYKikTXAaEx0XcW8fX3mMSV8kPQPOC7qYNC1DGqvPMrR7HZGnu4HmhqCGImWBsMY0oIi7FKqA6RTBhL8ejspkuAlqHm+hiwZXRq4dEBMryLfA3BCawLEiXvr4f41feLKOYAw+fHvFO+xwpdtNY94LM/UoMx8rrhaew4caaA3sBWfMKNnYFw7Dme6FBeJ4v4yLnj9QoAvUGlVBeQFGZyjvl/QJU64iaK26LClP3RN5+vipV9JGWBFDBVvp7brvs=
+  - secure: izqdo6a1jJynoulAJaNVBmyscDK3xcqXU38POhtheYWJseqvi4+XM1pgeHnAyF8l3zJrRmRDWYeTdWufWBEJyEZct79GnsZSEu84FFyMvXxzsmC0xlm38OEsqEwBvxg9FaYlqawICL1WXe8IW2V3cGMYMDprfpho/uwwJxwFzJ3RPKobHTZsTO2IY6821/dsuEhtoxkSna9TqzzMBtpdrC5/OlEUmFH/qao0qThkjCnSut1VWDYwkLc/J9VHAXmGF95IxtxUSjYkiySVDQ3G2WN6qM27ThZoAWiujsvpdSagnU359RzgaxXJMzSf6xQc6/m6dmgefC2Nru6X/QReCRInlnytcPVrqJl4mHCvwrz443WG2g4OcQqEgMl9zV+HhAshuxpu1YbrI5xYlbTxqOpbKL7c1yCc27D/e8P94VwATsIvXxyaTYhtD8QDYA0npsf5T4wX05BLQUbaw5QBtCgTjWId+Jbu0mTtPEfr1dbDYF4q8nTJTihgUmMqrlI9gN+/IcmU92PTIhq+luwIU+60xRm5V+yzT/0QqfuOKQwZgjRNaNjoMXMEPdOWatdhf2U7rYptCoDg4qPbXoSEEAOzEokYcUequBZBINfxQ1d4YNX1ZrDPY1EG1hBpc8Eu0ahqfN4WRZC0akdywI6guf/3ZYF+A76MbSi5cWwacdk=
