@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Decrypt certs
+openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/profile/TryTravisCI.mobileprovision.enc -d -a -out scripts/profile/TryTravisCI.mobileprovision
+openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d -a -out scripts/certs/dist.cer
+openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a -out scripts/certs/dist.p12
+
 # Create a custom keychain
 security create-keychain -p travis ios-build.keychain
 

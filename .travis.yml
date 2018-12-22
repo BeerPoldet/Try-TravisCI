@@ -7,6 +7,9 @@ xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone XS
 before_install:
   - gem install xcpretty
 
+before_script:
+- "./scripts/add-key.sh"
+
 stages:
   - test
   - name: deploy
@@ -16,13 +19,6 @@ jobs:
   include:
     - stage: deploy
       before_script:
-      - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/profile/TryTravisCI.mobileprovision.enc
-        -d -a -out scripts/profile/TryTravisCI.mobileprovision
-      - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d -a
-        -out scripts/certs/dist.cer
-      - openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a
-        -out scripts/certs/dist.p12
-      - "./scripts/add-key.sh"
       - "./scripts/update-bundle.sh"
       script:
       - "./scripts/build.sh"
