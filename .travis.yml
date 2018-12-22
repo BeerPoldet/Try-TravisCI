@@ -8,9 +8,6 @@ before_install:
   - gem install xcpretty
   - gem install xcpretty-travis-formatter
 
-before_script:
-- "./scripts/add-key.sh"
-
 stages:
   - test
   - name: deploy
@@ -20,6 +17,7 @@ jobs:
   include:
     - stage: deploy
       before_script:
+      - "./scripts/add-key.sh"
       - "./scripts/update-bundle.sh"
       script:
       - "./scripts/build.sh"
@@ -28,7 +26,10 @@ jobs:
       after_script:
       - "./scripts/remove-key.sh"
     - stage: test
-      script: "./scripts/test.sh"
+      before_script:
+      - "./scripts/add-key.sh"
+      script: 
+      - "./scripts/test.sh"
 
 env:
   global:
