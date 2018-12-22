@@ -1,8 +1,5 @@
 #!/bin/sh
 
-chmod a-w ~/Library/Developer/Xcode/
-chmod a-w ~/Library/Developer/Xcode/DerivedData
-
 xcodebuild $XCODE_ROOT \
   -scheme $XCODE_SCHEME \
   -sdk iphonesimulator \
