@@ -9,12 +9,18 @@ if [[ "$TRAVIS_BRANCH" != "master" ]]; then
 fi
 
 PROVISIONING_PROFILE="$HOME/Library/MobileDevice/Provisioning Profiles/$PROFILE_NAME.mobileprovision"
-OUTPUTDIR="$PWD/build/Release-iphoneos"
+BUILDDIR="$PWD/build"
+OUTPUTDIR="$BUILDDIR/Release-iphoneos"
 
 echo "***************************"
 echo "*        Signing          *"
 echo "***************************"
-xcrun -log -sdk iphoneos PackageApplication "$OUTPUTDIR/$APP_NAME.app" -o "$OUTPUTDIR/$APP_NAME.ipa" -sign "$DEVELOPER_NAME" -embed "$PROVISIONING_PROFILE"
+echo ""
+echo "App: $APP_NAME"
+echo ""
+# xcrun -log -sdk iphoneos PackageApplication "$OUTPUTDIR/$APP_NAME.app" -o "$OUTPUTDIR/$APP_NAME.ipa" -sign "$DEVELOPER_NAME" -embed "$PROVISIONING_PROFILE"
+xcodebuild -project $APP_NAME.xcodeproj -scheme $APP_NAME -sdk iphoneos -configuration AppStoreDistribution archive -archivePath BUILDDIR/$APP_NAME.xcarchive
+xcodebuild -exportArchive -archivePath BUILDDIR/$APP_NAME.xcarchive -exportOptionsPlist exportOptions.plist -exportPath BUILDDIR
 
 RELEASE_DATE=`date '+%Y-%m-%d %H:%M:%S'`
 RELEASE_NOTES="Build: $TRAVIS_BUILD_NUMBER\nUploaded: $RELEASE_DATE"
@@ -24,4 +30,5 @@ echo "**********************************"
 echo "* Uploading to App Store Connect *"
 echo "**********************************"
 
+export PATH = $PATH:/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Support/altool
 altool --upload-app -f "$OUTPUTDIR/$APP_NAME.ipa" -u $APP_STORE_CONNECT_USERNAME -p $APP_STORE_CONNECT_PASSWORD
