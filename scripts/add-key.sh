@@ -23,4 +23,4 @@ security import ./scripts/certs/dist.p12 -k ~/Library/Keychains/ios-build.keycha
 mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
 cp "./scripts/profile/$PROFILE_NAME.mobileprovision" ~/Library/MobileDevice/Provisioning\ Profiles/
 
-security set-key-partition-list -S apple-tool:,apple: -s -k ios-build.keychain > /dev/null
+security set-key-partition-list -S apple-tool:,apple: -s -k $KEY_PASSWORD ios-build.keychain > /dev/null
