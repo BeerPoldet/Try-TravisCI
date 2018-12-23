@@ -15,8 +15,12 @@ stages:
 jobs:
   include:
     - stage: deploy
+      before_script:
+      - ./scripts/add-key.sh
       script:
       - fastlane beta
+      after_script:
+      - ./scripts/remove-key.sh
     - stage: test
       script: 
       - fastlane test
