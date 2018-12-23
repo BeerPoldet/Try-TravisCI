@@ -5,8 +5,7 @@ xcode_scheme: Try-TravisCI
 xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone XS
 
 before_install:
-  - gem install xcpretty
-  - gem install xcpretty-travis-formatter
+  - bundle install
 
 stages:
   - test
@@ -16,22 +15,11 @@ stages:
 jobs:
   include:
     - stage: deploy
-      before_script:
-      - "./scripts/add-key.sh"
-      - "./scripts/update-bundle.sh"
       script:
-      - "./scripts/build.sh"
-      after_success:
-      - "./scripts/sign-and-upload.sh"
-      after_script:
-      - "./scripts/remove-key.sh"
+      - fastlane beta
     - stage: test
-      before_script:
-      - "./scripts/add-key.sh"
       script: 
-      - "./scripts/test.sh"
-      after_script:
-      - "./scripts/remove-key.sh"
+      - fastlane test
 
 env:
   global:
