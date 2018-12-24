@@ -51,7 +51,7 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     build_app(
-      xcodeproj: xcodeproj,
+      project: xcodeproj,
       scheme: scheme, 
       codesigning_identity: ENV["DEVELOPER_NAME"],
       export_method: "app-store",
