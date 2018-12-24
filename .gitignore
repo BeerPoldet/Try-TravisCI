@@ -1,7 +1,3 @@
-dist.cer
-dist.p12
-TryTravisCI.mobileprovision
-
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
@@ -70,3 +66,12 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+## Cert, Key, Provision
+*.cer
+*.p12
+*.mobileprovision
+
+## Environment normalization:
+/.bundle/
+/vendor/bundle
