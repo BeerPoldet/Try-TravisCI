@@ -16,7 +16,7 @@
 xcodeproj = ENV["XCODE_PROJECT"]
 scheme = ENV["XCODE_SCHEME"]
 
-setup_travis
+# setup_travis
 
 default_platform(:ios)
 
