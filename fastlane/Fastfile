@@ -43,8 +43,8 @@ def increment_build_number_then_remote_push(xcodeproj)
   # Push the new commit and tag back to your git remote
   sh 'git config --global user.email "$GIT_USER_EMAIL"'
   sh 'git config --global user.name "$GIT_USER_NAME"'
-  sh 'git remote add origin https://${GIT_TOKEN}@github.com/MVSE-outreach/resources.git > /dev/null 2>&1'
-  
+  sh 'git remote add origin https://${GIT_TOKEN}@github.com/BeerPoldet/Try-TravisCI.git'
+
   push_to_git_remote
 end
 
