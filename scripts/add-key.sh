@@ -23,6 +23,10 @@ security import ./scripts/certs/apple.cer -k ~/Library/Keychains/ios-build.keych
 security import ./scripts/certs/dist.cer -k ~/Library/Keychains/ios-build.keychain -T /usr/bin/codesign
 security import ./scripts/certs/dist.p12 -k ~/Library/Keychains/ios-build.keychain -P $KEY_PASSWORD -T /usr/bin/codesign
 
+rm -f scripts/certs/dist.cer
+rm -f scripts/certs/dist.p12
+rm -f scripts/profile/$PROFILE_NAME.mobileprovision
+
 security set-key-partition-list -S apple-tool:,apple: -s -k travis ios-build.keychain
 
 # Put the provisioning profile in place
