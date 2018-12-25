@@ -44,8 +44,8 @@ def increment_build_number_then_remote_push(xcodeproj)
   sh 'git config --global user.email "$GIT_USER_EMAIL"'
   sh 'git config --global user.name "$GIT_USER_NAME"'
   sh 'git remote set-url origin https://${GIT_TOKEN}@github.com/BeerPoldet/Try-TravisCI.git'
-
-  push_to_git_remote
+  sh 'git push origin fastlane --quiet'
+  # push_to_git_remote
 end
 
 platform :ios do
