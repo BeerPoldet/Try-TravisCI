@@ -16,50 +16,35 @@
 xcodeproj = ENV["XCODE_PROJECT"]
 scheme = ENV["XCODE_SCHEME"]
 
-# setup_travis
-
 default_platform(:ios)
 
-def increment_build_number_then_remote_push(xcodeproj)
+def do_increment_build_number(xcodeproj)
   build_number = [
     get_build_number(xcodeproj: xcodeproj).to_i, 
     latest_testflight_build_number
   ].max + 1
-
-  # Increment the build number (not the version number)
-  # Providing the xcodeproj is optional
   increment_build_number(
     build_number: build_number,
     xcodeproj: xcodeproj
   )
+end
 
-  sh "git checkout fastlane"
-
-  # Commit the version bump
+def commit_and_push(xcodeproj)
   commit_version_bump(
     xcodeproj: xcodeproj,
     message: format("[SKIP CI] New Build: %d 🎁", build_number),
     force: true
   )
-
-  # Add a git tag for this build. This will automatically
-  # use an appropriate git tag name
   add_git_tag
-
-  # Push the new commit and tag back to your git remote
-  push_to_git_remote(
-    remote: 'origin',
-    local_branch: 'fastlane',
-    remote_branch: 'fastlane',
-    tags: true
-  )
+  push_to_git_remote
 end
 
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     ensure_git_status_clean
-    increment_build_number_then_remote_push(xcodeproj)
+    do_increment_build_number(xcodeproj)
+    commit_and_push(xcodeproj)
     build_app(
       project: xcodeproj,
       scheme: scheme, 

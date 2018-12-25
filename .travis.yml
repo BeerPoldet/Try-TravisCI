@@ -16,16 +16,12 @@ jobs:
   - stage: deploy
     before_script:
     - "./scripts/add-key.sh"
-    - git config --global push.default simple
-    - git remote set-url origin https://${GIT_TOKEN}@github.com/${GIT_URL}.git
+    - "./scripts/prepare-git.sh"
     script:
     - fastlane beta
     after_script:
     - "./scripts/remove-key.sh"
   - stage: test
-    before_script:
-    - echo $TRAVIS_BRANCH
-    - echo $TRAVIS_PULL_REQUEST_BRANCH
     script:
     - fastlane test
 env:
