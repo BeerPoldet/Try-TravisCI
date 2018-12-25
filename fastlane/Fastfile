@@ -27,9 +27,10 @@ def do_increment_build_number(xcodeproj)
     build_number: build_number,
     xcodeproj: xcodeproj
   )
+  build_number
 end
 
-def commit_and_push(xcodeproj)
+def commit_and_push(xcodeproj, build_number)
   commit_version_bump(
     xcodeproj: xcodeproj,
     message: format("[SKIP CI] New Build: %d 🎁", build_number),
@@ -43,8 +44,8 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     ensure_git_status_clean
-    do_increment_build_number(xcodeproj)
-    commit_and_push(xcodeproj)
+    build_number = do_increment_build_number(xcodeproj)
+    commit_and_push(xcodeproj, build_number)
     build_app(
       project: xcodeproj,
       scheme: scheme, 

@@ -8,12 +8,14 @@ cache:
 - cocoapods
 
 stages:
-- name: deploy
-  if: branch = fastlane
+- name: test
+  if: type = pull_request
+- name: beta
+  # if: type = push AND branch = develop
 
 jobs:
   include:
-  - stage: deploy
+  - stage: beta
     before_script:
     - "./scripts/add-key.sh"
     - "./scripts/prepare-git.sh"
