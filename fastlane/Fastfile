@@ -45,13 +45,7 @@ def increment_build_number_then_remote_push(xcodeproj)
   add_git_tag
 
   # Push the new commit and tag back to your git remote
-  push_to_git_remote(
-    remote: 'origin',
-    local_branch: 'fastlane',
-    remote_branch: 'fastlane',
-    force: true,
-    tags: true
-  )
+  push_to_git_remote
 end
 
 platform :ios do

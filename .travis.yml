@@ -6,10 +6,11 @@ xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone XS
 cache:
 - bundler
 - cocoapods
+
 stages:
-- test
-# - name: deploy
-#   if: branch = fastlane
+- name: deploy
+  if: branch = fastlane
+
 jobs:
   include:
   - stage: deploy
