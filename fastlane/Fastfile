@@ -33,7 +33,7 @@ def increment_build_number_then_remote_push(xcodeproj)
     xcodeproj: xcodeproj
   )
 
-  sh "git checkout -b fastlane"
+  sh "git checkout fastlane"
 
   # Commit the version bump
   commit_version_bump(
