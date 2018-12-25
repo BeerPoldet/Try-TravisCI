@@ -33,20 +33,18 @@ def increment_build_number_then_remote_push(xcodeproj)
     xcodeproj: xcodeproj
   )
 
-  # Push the new commit and tag back to your git remote
-  sh 'git config --global user.email "$GIT_USER_EMAIL"'
-  sh 'git config --global user.name "$GIT_USER_NAME"'
-  sh 'git remote set-url origin https://${GIT_TOKEN}@github.com/BeerPoldet/Try-TravisCI.git'
-
   # Commit the version bump
-  commit_version_bump(xcodeproj: xcodeproj)
+  commit_version_bump(
+    xcodeproj: xcodeproj,
+    message: format("[SKIP CI] New Build: %d", build_number)
+  )
 
   # Add a git tag for this build. This will automatically
   # use an appropriate git tag name
   add_git_tag
 
-  sh 'git push origin fastlane'
-  # push_to_git_remote
+  # Push the new commit and tag back to your git remote
+  push_to_git_remote
 end
 
 platform :ios do
