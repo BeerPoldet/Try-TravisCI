@@ -36,7 +36,7 @@ def increment_build_number_then_remote_push(xcodeproj)
   # Commit the version bump
   commit_version_bump(
     xcodeproj: xcodeproj,
-    message: format("[SKIP CI] New Build: %d", build_number)
+    message: format("[SKIP CI] New Build: %d 🎁", build_number)
   )
 
   # Add a git tag for this build. This will automatically
