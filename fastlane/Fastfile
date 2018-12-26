@@ -36,9 +36,7 @@ def commit_and_push(xcodeproj, build_number, build_type)
     message: format("[SKIP CI] New Build: %d 🎁", build_number),
     force: true
   )
-  tag = build_type == 'prod' 
-    ? "v#{build_number}"
-    : "v#{build_number}-#{build_type}"
+  tag = build_type == 'prod' ? "v#{build_number}" : "v#{build_number}-#{build_type}"
   add_git_tag(tag: tag)
   push_to_git_remote
 end
