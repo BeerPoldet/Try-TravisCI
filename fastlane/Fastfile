@@ -48,14 +48,7 @@ platform :ios do
     commit_and_push(xcodeproj, build_number)
     build_app(
       project: xcodeproj,
-      scheme: scheme, 
-      codesigning_identity: ENV["DEVELOPER_NAME"],
-      export_method: "app-store",
-      export_options: {
-        provisioningProfiles: { 
-          ENV["BUNDLE_ID"] => ENV["PROFILE_NAME"]
-        }
-      }
+      scheme: scheme
     )
     changelog_from_git_commits
     upload_to_testflight

@@ -9,9 +9,8 @@ cache:
 
 stages:
 - name: test
-  if: type = pull_request
 - name: beta
-  if: type = push AND branch = develop
+  if: type = push AND branch = \d+.\d+.\d+-dev$
 
 jobs:
   include:
