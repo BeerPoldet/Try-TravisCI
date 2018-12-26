@@ -10,7 +10,7 @@ cache:
 stages:
 - name: test
 - name: beta
-  if: type = push AND branch = /\d+.\d+.\d+-dev$/
+  if: type = push AND branch =~ /\d+.\d+.\d+-dev$/
 
 jobs:
   include:
