@@ -10,10 +10,15 @@ cache:
 stages:
 - name: test
 - name: beta
-  if: type = push AND branch =~ /\d+.\d+.\d+-dev$/
+  if: type = push AND branch = beta
+- name: prod
+  if: type = push AND branch = master
 
 jobs:
   include:
+  - stage: prod
+    script:
+    - fastlane prod
   - stage: beta
     before_script:
     - "./scripts/add-key.sh"
