@@ -8,9 +8,7 @@ cache:
 - cocoapods
 
 stages:
-- name: test
 - name: beta
-  if: type = push AND branch = \d+.\d+.\d+-dev$
 
 jobs:
   include:
