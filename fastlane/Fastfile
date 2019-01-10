@@ -69,8 +69,8 @@ platform :ios do
         'th-TH' => 'keyword-qa-th'
       },
       promotional_text: {
-        'default => ''promotional_text-qa',
-        'th-TH => ''promotional_text-qa-th'
+        'default' => 'promotional_text-qa',
+        'th-TH' => 'promotional_text-qa-th'
       }
     )
   end
