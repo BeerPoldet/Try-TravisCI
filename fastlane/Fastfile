@@ -52,7 +52,7 @@ platform :ios do
       project: xcodeproj,
       scheme: scheme
     )
-    changelog_from_git_commits
+    # changelog_from_git_commits
     upload_to_testflight(changelog: "Shiny and new อิอิ")
     
     # upload_to_app_store(
