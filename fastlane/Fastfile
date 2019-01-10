@@ -53,7 +53,10 @@ platform :ios do
       scheme: scheme
     )
     # changelog_from_git_commits
-    upload_to_testflight(changelog: "Shiny and new อิอิ")
+    upload_to_testflight(
+      changelog: "Shiny and new อิอิ",
+      beta_app_description: "beta_app_description beta_app_description beta_app_description"
+    )
     
     # upload_to_app_store(
     #   force: true,
