@@ -54,8 +54,8 @@ platform :ios do
     )
     # changelog_from_git_commits
     upload_to_testflight(
-      changelog: "Shiny and new อิอิ",
-      beta_app_description: "beta_app_description beta_app_description beta_app_description"
+      changelog: "Shiny and new new new new",
+      skip_waiting_for_build_processing: true
     )
     
     # upload_to_app_store(
