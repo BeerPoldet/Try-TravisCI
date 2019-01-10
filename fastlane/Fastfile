@@ -54,10 +54,7 @@ platform :ios do
     )
     changelog_from_git_commits
     # upload_to_testflight
-    release_notes({
-      'default' => "Shiny and new",
-      'th-TH' => "ทดสอบ"
-    })
+    
     upload_to_app_store(
       force: true,
       skip_metadata: true,
@@ -71,6 +68,10 @@ platform :ios do
       promotional_text: {
         'default' => 'promotional_text-qa',
         'th-TH' => 'promotional_text-qa-th'
+      },
+      release_notes: {
+        'default' => "Shiny and new",
+        'th-TH' => "ทดสอบ"
       }
     )
   end
