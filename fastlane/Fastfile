@@ -53,27 +53,27 @@ platform :ios do
       scheme: scheme
     )
     changelog_from_git_commits
-    # upload_to_testflight
+    upload_to_testflight(changelog: "Shiny and new อิอิ")
     
-    upload_to_app_store(
-      force: true,
-      skip_metadata: true,
-      skip_screenshots: true,
-      skip_app_version_update: true,
-      submit_for_review: false,
-      keywords: {
-        'default' => 'keyword-qa',
-        'th-TH' => 'keyword-qa-th'
-      },
-      promotional_text: {
-        'default' => 'promotional_text-qa',
-        'th-TH' => 'promotional_text-qa-th'
-      },
-      release_notes: {
-        'default' => "Shiny and new",
-        'th-TH' => "ทดสอบ"
-      }
-    )
+    # upload_to_app_store(
+    #   force: true,
+    #   skip_metadata: true,
+    #   skip_screenshots: true,
+    #   skip_app_version_update: true,
+    #   submit_for_review: false,
+    #   keywords: {
+    #     'default' => 'keyword-qa',
+    #     'th-TH' => 'keyword-qa-th'
+    #   },
+    #   promotional_text: {
+    #     'default' => 'promotional_text-qa',
+    #     'th-TH' => 'promotional_text-qa-th'
+    #   },
+    #   release_notes: {
+    #     'default' => "Shiny and new",
+    #     'th-TH' => "ทดสอบ"
+    #   }
+    # )
   end
 
   lane :test do
