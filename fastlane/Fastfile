@@ -54,14 +54,24 @@ platform :ios do
     )
     changelog_from_git_commits
     # upload_to_testflight
+    release_notes({
+      'default' => "Shiny and new",
+      'th-TH' => "ทดสอบ"
+    })
     upload_to_app_store(
       force: true,
       skip_metadata: true,
       skip_screenshots: true,
       skip_app_version_update: true,
       submit_for_review: false,
-      keywords: ['keyword-qa'],
-      promotional_text: ['promotional_text-qa']
+      keywords: {
+        'default' => 'keyword-qa',
+        'th-TH' => 'keyword-qa-th'
+      },
+      promotional_text: {
+        'default => ''promotional_text-qa'
+        'th-TH => ''promotional_text-qa-th'
+      }
     )
   end
 
