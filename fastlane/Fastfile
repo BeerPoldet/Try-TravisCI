@@ -54,8 +54,8 @@ platform :ios do
     )
     # changelog_from_git_commits
     upload_to_testflight(
-      changelog: "this is for uta",
-      groups: ['App Store Connect Users', 'Group A'],
+      changelog: "this is for qa",
+      groups: ['App Store Connect Users'],
       skip_waiting_for_build_processing: false
     )
     
