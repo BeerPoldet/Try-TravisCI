@@ -51,8 +51,6 @@ platform :ios do
       scheme: scheme
     )
     changelog_from_git_commits(
-      pretty: "- (%ae) %s",
-      date_format: "short",
       merge_commit_filtering: "exclude_merges"
     )
     build_type = 'beta'
