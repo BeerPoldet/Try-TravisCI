@@ -45,18 +45,16 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     ensure_git_status_clean
+    commit = last_git_commit
     build_number = do_increment_build_number(xcodeproj)
     build_app(
       project: xcodeproj,
       scheme: scheme
     )
-    changelog_from_git_commits(
-      pretty: "QA Testing Release: %s",
-      merge_commit_filtering: "exclude_merges"
-    )
     build_type = 'beta'
     commit_and_push(xcodeproj, build_number, build_type)
     upload_to_testflight(
+      changelog: "QA Testing Release: " + commit[:message],
       groups: ['App Store Connect Users'],
       skip_waiting_for_build_processing: false
     )
