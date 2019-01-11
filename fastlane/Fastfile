@@ -52,9 +52,8 @@ platform :ios do
       project: xcodeproj,
       scheme: scheme
     )
-    # changelog_from_git_commits
+    changelog_from_git_commits
     upload_to_testflight(
-      changelog: "this is for uta",
       groups: ['App Store Connect Users', 'Group A'],
       distribute_external: true,
       skip_waiting_for_build_processing: false

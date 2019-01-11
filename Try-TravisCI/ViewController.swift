@@ -10,9 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
 
+  @IBOutlet weak var label: UILabel!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+    
+    if let appVersion = appVersion, let buildVersion = buildVersion {
+      label.text = "\(appVersion) (\(buildVersion))"
+    }
   }
 
 
