@@ -89,7 +89,9 @@ platform :ios do
       export_options: {
         method: "app-store",
         provisioningProfiles: { 
-          "assanee.try.travisci.*" => "TryTravisCI"
+          "assanee.try.travisci.debug" => "TryTravisCI",
+          "assanee.try.travisci.beta" => "TryTravisCI",
+          "assanee.try.travisci.release" => "TryTravisCI"
         }
       }
     )
