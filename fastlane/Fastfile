@@ -57,13 +57,13 @@ platform :ios do
       scheme: scheme
     )
     build_type = 'beta'
-    commit_and_push(xcodeproj, build_number, build_type)
     upload_to_testflight(
       changelog: "QA Testing Release: " + changes_message,
       groups: ['App Store Connect Users'],
       skip_waiting_for_build_processing: false
     )
-    # upload_to_app_store(
+    commit_and_push(xcodeproj, build_number, build_type)
+      # upload_to_app_store(
     #   force: true,
     #   skip_metadata: true,
     #   skip_screenshots: true,
