@@ -65,14 +65,14 @@ end
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
+    ensure_git_status_clean
     build_type = 'beta'
     
     build_number = do_increment_build_number(xcodeproj)
     tag = create_tag(build_number, build_type)
     changelog = create_change_log(tag)
     print_message("Change Logs: #{changelog}")
-    
-    ensure_git_status_clean
+
     build_app(
       project: xcodeproj,
       scheme: scheme
