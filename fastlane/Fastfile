@@ -49,17 +49,17 @@ def print_message(message)
 end
 
 configs = {
-  debug => {
-    scheme => "Try-TravisCI-Debug",
-    create_tag => -> (build_number, build_type) { "v#{build_number}-#{build_type}" }
+  :debug => {
+    :scheme => "Try-TravisCI-Debug",
+    :create_tag => -> { |build_number, build_type| "v#{build_number}-#{build_type}" }
   },
-  beta => {
-    scheme => "Try-TravisCI-Beta",
-    create_tag => -> (build_number, build_type) { "v#{build_number}-#{build_type}" }
+  :beta => {
+    :scheme => "Try-TravisCI-Beta",
+    :create_tag => -> { |build_number, build_type| "v#{build_number}-#{build_type}" }
   },
-  prod => {
-    scheme => "Try-TravisCI-Release",
-    create_tag => -> (build_number) { "v#{build_number}" }
+  :prod => {
+    :scheme => "Try-TravisCI-Release",
+    :create_tag => -> { |build_number| "v#{build_number}" }
   }
 }
 
@@ -71,10 +71,10 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     print_message("Stage beta")
-    config = configs.beta
+    config = configs[:beta]
     
     build_number = next_build_number(xcodeproj)
-    tag = config.create_tag.call(build_number, build_type)
+    tag = config[:create_tag].call(build_number, build_type)
     changelog = create_change_log(tag)
     print_message("Change Logs: #{changelog}")
     
@@ -85,7 +85,7 @@ platform :ios do
     )
     build_app(
       project: xcodeproj,
-      scheme: config.scheme
+      scheme: config[:scheme]
     )
     upload_to_testflight(
       changelog: changelog,
@@ -116,6 +116,6 @@ platform :ios do
 
   lane :test do
     print_message("Stage test")
-    run_tests(scheme: configs.debug.scheme)
+    run_tests(scheme: configs[:debug][:scheme])
   end
 end
