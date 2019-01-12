@@ -53,9 +53,9 @@ def print_message(message)
 end
 
 schemes = {
-  "debug" => "Try-Travis-Debug",
-  "beta" => "Try-Travis-Beta",
-  "release" => "Try-Travis-Release"
+  "debug" => "Try-TravisCI-Debug",
+  "beta" => "Try-TravisCI-Beta",
+  "release" => "Try-TravisCI-Release"
 }
 
 xcodeproj = ENV["XCODE_PROJECT"]
