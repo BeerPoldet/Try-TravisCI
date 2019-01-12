@@ -62,7 +62,7 @@ platform :ios do
       changelog: "QA Testing Release: " + changes_message,
       groups: ['App Store Connect Users'],
       skip_waiting_for_build_processing: false,
-      reject_previously_submitted_build: true
+      reject_build_waiting_for_review: true
     )
     build_type = 'beta'
     commit_and_push(xcodeproj, build_number, build_type)
