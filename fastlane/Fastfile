@@ -30,15 +30,17 @@ def do_increment_build_number(xcodeproj)
   build_number
 end
 
-def commit_and_push(xcodeproj, build_number, build_type)
+def create_tag(build_number, build_type)
+  build_type == 'prod' ? "v#{build_number}" : "v#{build_number}-#{build_type}"
+
+def commit_and_push(xcodeproj, build_number, tag)
   commit_version_bump(
     xcodeproj: xcodeproj,
     message: format("[SKIP CI] New Build: %d 🎁", build_number),
     force: true
   )
-  tag = build_type == 'prod' ? "v#{build_number}" : "v#{build_number}-#{build_type}"
   add_git_tag(tag: tag)
-  branch_name = ENV['TRAVIS_BRANCH']
+  branch_name = git_branch
   puts "Pushing to remote_branch: #{branch_name}"
   push_to_git_remote(
     local_branch: "HEAD",
@@ -46,26 +48,30 @@ def commit_and_push(xcodeproj, build_number, build_type)
   )
 end
 
+def create_change_log(tag)
+  changelog_url = ENV["CHANGE_LOG_URL"]
+  "QA Testing Release\nYou can view change logs: #{changelog_url}/#{tag}"
+
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     ensure_git_status_clean
     commit = last_git_commit
-    changes_message = commit[:message]
-    puts changes_message
     build_number = do_increment_build_number(xcodeproj)
     build_app(
       project: xcodeproj,
       scheme: scheme
     )
+    tag = create_tag(build_number, build_type)
+    changelog = create_change_log(tag)
+    puts "CHANGELOG: #{changelog}"
     upload_to_testflight(
-      changelog: "QA Testing Release: " + changes_message,
-      groups: ['App Store Connect Users'],
+      changelog: changelog,
       skip_waiting_for_build_processing: false,
       reject_build_waiting_for_review: true
     )
     build_type = 'beta'
-    commit_and_push(xcodeproj, build_number, build_type)
+    commit_and_push(xcodeproj, build_number, tag)
       # upload_to_app_store(
     #   force: true,
     #   skip_metadata: true,
