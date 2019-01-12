@@ -606,7 +606,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = assanee.try.travisci;
+				PRODUCT_BUNDLE_IDENTIFIER = assanee.try.travisci.release;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = TryTravisCI;
 				SWIFT_VERSION = 4.2;

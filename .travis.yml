@@ -36,9 +36,9 @@ jobs:
     - "./scripts/remove-key.sh"
 
   - stage: test
-    xcode_project: Try-TravisCI.xcodeproj
-    xcode_scheme: Try-TravisCI
     xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone XS
+    script:
+    - fastlane test
   
 env:
   global:
