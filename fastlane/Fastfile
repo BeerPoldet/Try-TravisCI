@@ -39,7 +39,7 @@ def commit_and_push(xcodeproj, build_number, build_type)
   tag = build_type == 'prod' ? "v#{build_number}" : "v#{build_number}-#{build_type}"
   add_git_tag(tag: tag)
   branch_name = ENV['TRAVIS_BRANCH']
-  puts "Pushing to #{branch_name}"
+  puts "Pushing to remote_branch: #{branch_name}"
   push_to_git_remote(
     local_branch: "HEAD",
     remote_branch: branch_name
@@ -54,16 +54,16 @@ platform :ios do
     changes_message = commit[:message]
     puts changes_message
     build_number = do_increment_build_number(xcodeproj)
-    # build_app(
-    #   project: xcodeproj,
-    #   scheme: scheme
-    # )
-    # upload_to_testflight(
-    #   changelog: "QA Testing Release: " + changes_message,
-    #   groups: ['App Store Connect Users'],
-    #   skip_waiting_for_build_processing: false,
-    #   reject_previously_submitted_build: true
-    # )
+    build_app(
+      project: xcodeproj,
+      scheme: scheme
+    )
+    upload_to_testflight(
+      changelog: "QA Testing Release: " + changes_message,
+      groups: ['App Store Connect Users'],
+      skip_waiting_for_build_processing: false,
+      reject_previously_submitted_build: true
+    )
     build_type = 'beta'
     commit_and_push(xcodeproj, build_number, build_type)
       # upload_to_app_store(

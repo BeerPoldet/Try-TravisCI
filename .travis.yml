@@ -10,23 +10,30 @@ cache:
 stages:
 - name: test
 - name: beta
-  if: type = push AND branch = beta
+  if: type = push AND branch = beta-release
 - name: prod
-  if: type = push AND branch = master
+  if: type = push AND branch = prod-release
 
 jobs:
   include:
   - stage: prod
     script:
     - fastlane prod
-  - stage: beta
     before_script:
     - "./scripts/add-key.sh"
     - "./scripts/prepare-git.sh"
-    script:
-    - fastlane beta
     after_script:
     - "./scripts/remove-key.sh"
+
+  - stage: beta
+    script:
+    - fastlane beta
+    before_script:
+    - "./scripts/add-key.sh"
+    - "./scripts/prepare-git.sh"
+    after_script:
+    - "./scripts/remove-key.sh"
+    
   - stage: test
     script:
     - fastlane test
