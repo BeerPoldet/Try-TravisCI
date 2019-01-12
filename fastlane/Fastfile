@@ -116,6 +116,6 @@ platform :ios do
 
   lane :test do
     print_message("Stage test")
-    run_tests(scheme: scheme)
+    run_tests(scheme: configs.debug.scheme)
   end
 end
