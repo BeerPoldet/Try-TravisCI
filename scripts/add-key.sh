@@ -29,6 +29,8 @@ security set-key-partition-list -S apple-tool:,apple: -s -k travis ios-build.key
 mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
 cp "./scripts/profile/$PROFILE_NAME.mobileprovision" ~/Library/MobileDevice/Provisioning\ Profiles/
 
+ls ~/Library/MobileDevice/Provisioning\ Profiles
+
 rm -f scripts/certs/dist.cer
 rm -f scripts/certs/dist.p12
 rm -f scripts/profile/$PROFILE_NAME.mobileprovision
