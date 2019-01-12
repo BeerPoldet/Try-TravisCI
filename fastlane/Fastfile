@@ -13,11 +13,6 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-xcodeproj = ENV["XCODE_PROJECT"]
-scheme = ENV["XCODE_SCHEME"]
-
-default_platform(:ios)
-
 def next_build_number(xcodeproj)
   build_number = [
     get_build_number(xcodeproj: xcodeproj).to_i, 
@@ -57,10 +52,21 @@ def print_message(message)
   puts "\n"
 end
 
+schemes = {
+  "debug" => "Try-Travis-Debug",
+  "beta" => "Try-Travis-Beta",
+  "release" => "Try-Travis-Release"
+}
+
+xcodeproj = ENV["XCODE_PROJECT"]
+
+default_platform(:ios)
+
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     print_message("Stage beta")
+    scheme = schemes('beta')
     build_type = 'beta'
     
     build_number = next_build_number(xcodeproj)

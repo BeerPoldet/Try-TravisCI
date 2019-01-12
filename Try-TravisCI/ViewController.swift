@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
     
     if let appVersion = appVersion, let buildVersion = buildVersion {
-      label.text = "\(appVersion) (\(buildVersion))"
+      label.text = "\(appVersion) (\(buildVersion)) at \(Configs.apiURL.absoluteString)"
     }
   }
 
