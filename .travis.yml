@@ -9,6 +9,7 @@ cache:
 
 stages:
 - name: test
+  if: type = push AND branch != beta-release AND branch != prod-release
 - name: beta
   if: type = push AND branch = beta-release
 - name: prod
@@ -37,6 +38,7 @@ jobs:
   - stage: test
     script:
     - fastlane test
+
 env:
   global:
   - PROFILE_NAME="TryTravisCI"
