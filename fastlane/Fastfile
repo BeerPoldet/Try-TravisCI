@@ -51,15 +51,15 @@ end
 configs = {
   :debug => {
     :scheme => "Try-TravisCI-Debug",
-    :create_tag => -> { |build_number, build_type| "v#{build_number}-#{build_type}" }
+    :create_tag => { |build_number, build_type| "v#{build_number}-#{build_type}" }
   },
   :beta => {
     :scheme => "Try-TravisCI-Beta",
-    :create_tag => -> { |build_number, build_type| "v#{build_number}-#{build_type}" }
+    :create_tag => { |build_number, build_type| "v#{build_number}-#{build_type}" }
   },
   :prod => {
     :scheme => "Try-TravisCI-Release",
-    :create_tag => -> { |build_number| "v#{build_number}" }
+    :create_tag => { |build_number| "v#{build_number}" }
   }
 }
 
