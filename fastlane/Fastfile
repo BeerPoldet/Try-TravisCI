@@ -96,6 +96,7 @@ platform :ios do
       }
     )
     upload_to_testflight(
+      app_identifier: "assanee.try.travisci.beta",
       changelog: changelog,
       skip_waiting_for_build_processing: false,
       reject_build_waiting_for_review: true
