@@ -18,17 +18,12 @@ scheme = ENV["XCODE_SCHEME"]
 
 default_platform(:ios)
 
-def do_increment_build_number(xcodeproj)
+def next_build_number(xcodeproj)
   build_number = [
     get_build_number(xcodeproj: xcodeproj).to_i, 
     latest_testflight_build_number
   ].max + 1
-  increment_build_number(
-    build_number: build_number,
-    xcodeproj: xcodeproj
-  )
-  build_number
-end
+end 
 
 def create_tag(build_number, build_type)
   build_type == 'prod' ? "v#{build_number}" : "v#{build_number}-#{build_type}"
@@ -65,14 +60,18 @@ end
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
-    ensure_git_status_clean
     build_type = 'beta'
     
-    build_number = do_increment_build_number(xcodeproj)
+    build_number = next_build_number(xcodeproj)
     tag = create_tag(build_number, build_type)
     changelog = create_change_log(tag)
     print_message("Change Logs: #{changelog}")
-
+    
+    ensure_git_status_clean
+    increment_build_number(
+      build_number: build_number,
+      xcodeproj: xcodeproj
+    )
     build_app(
       project: xcodeproj,
       scheme: scheme
