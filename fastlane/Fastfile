@@ -60,6 +60,7 @@ end
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
+    print_message("Stage beta")
     build_type = 'beta'
     
     build_number = next_build_number(xcodeproj)
@@ -104,6 +105,7 @@ platform :ios do
   end
 
   lane :test do
+    print_message("Stage test")
     run_tests(scheme: scheme)
   end
 end
