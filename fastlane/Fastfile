@@ -51,11 +51,11 @@ end
 configs = {
   :debug => {
     :scheme => "Try-TravisCI-Debug",
-    :create_tag => -> (build_number, build_type) { "v#{build_number}-#{build_type}" }
+    :create_tag => -> (build_number) { "v#{build_number}-debug" }
   },
   :beta => {
     :scheme => "Try-TravisCI-Beta",
-    :create_tag => -> (build_number, build_type) { "v#{build_number}-#{build_type}" }
+    :create_tag => -> (build_number) { "v#{build_number}-beta" }
   },
   :prod => {
     :scheme => "Try-TravisCI-Release",
@@ -74,7 +74,7 @@ platform :ios do
     config = configs[:beta]
     
     build_number = next_build_number(xcodeproj)
-    tag = config[:create_tag].call(build_number, build_type)
+    tag = config[:create_tag].call(build_number)
     changelog = create_change_log(tag)
     print_message("Change Logs: #{changelog}")
     
