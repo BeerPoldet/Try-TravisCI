@@ -54,16 +54,17 @@ platform :ios do
     changes_message = commit[:message]
     puts changes_message
     build_number = do_increment_build_number(xcodeproj)
-    build_app(
-      project: xcodeproj,
-      scheme: scheme
-    )
+    # build_app(
+    #   project: xcodeproj,
+    #   scheme: scheme
+    # )
+    # upload_to_testflight(
+    #   changelog: "QA Testing Release: " + changes_message,
+    #   groups: ['App Store Connect Users'],
+    #   skip_waiting_for_build_processing: false,
+    #   reject_previously_submitted_build: true
+    # )
     build_type = 'beta'
-    upload_to_testflight(
-      changelog: "QA Testing Release: " + changes_message,
-      groups: ['App Store Connect Users'],
-      skip_waiting_for_build_processing: false
-    )
     commit_and_push(xcodeproj, build_number, build_type)
       # upload_to_app_store(
     #   force: true,
