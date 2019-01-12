@@ -89,7 +89,7 @@ platform :ios do
       export_options: {
         method: "app-store",
         provisioningProfiles: { 
-          "assanee.try.travisci.*" => "TryTrvisCI"
+          "assanee.try.travisci.*" => "TryTravisCI"
         }
       }
     )
