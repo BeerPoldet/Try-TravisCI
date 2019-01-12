@@ -38,9 +38,11 @@ def commit_and_push(xcodeproj, build_number, build_type)
   )
   tag = build_type == 'prod' ? "v#{build_number}" : "v#{build_number}-#{build_type}"
   add_git_tag(tag: tag)
+  branch_name = ENV['TRAVIS_BRANCH']
+  puts "Pushing to #{branch_name}"
   push_to_git_remote(
     local_branch: "HEAD",
-    remote_branch: ENV['TRAVIS_BRANCH']
+    remote_branch: branch_name
   )
 end
 
