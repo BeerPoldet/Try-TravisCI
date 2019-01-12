@@ -66,7 +66,7 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     print_message("Stage beta")
-    scheme = schemes('beta')
+    scheme = schemes['beta']
     build_type = 'beta'
     
     build_number = next_build_number(xcodeproj)
