@@ -7,6 +7,9 @@ cache:
 - bundler
 - cocoapods
 
+install:
+  - bundle install
+
 stages:
 - name: test
   if: type = push AND branch != beta-release AND branch != prod-release
