@@ -85,7 +85,13 @@ platform :ios do
     )
     build_app(
       project: xcodeproj,
-      scheme: config[:scheme]
+      scheme: config[:scheme],
+      export_options: {
+        method: "app-store",
+        provisioningProfiles: { 
+          "assanee.try.travisci.*" => "TryTrvisCI"
+        }
+      }
     )
     upload_to_testflight(
       changelog: changelog,

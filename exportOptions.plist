@@ -10,7 +10,7 @@
     <string>F6395XL53N</string>
     <key>provisioningProfiles</key>
     <dict>
-        <key>assanee.try.travisci</key>
+        <key>assanee.try.travisci.*</key>
         <string>TryTravisCI</string>
     </dict>
     <key>method</key>
