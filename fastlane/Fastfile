@@ -54,25 +54,34 @@ def create_change_log(tag)
   "QA Testing Release\nYou can view change logs: #{changelog_url}/#{tag}"
 end
 
+def print_message(message)
+  puts "\n"
+  puts "---------------------------------------------"
+  puts "--- #{message}"
+  puts "---------------------------------------------"
+  puts "\n"
+end
+
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
+    build_type = 'beta'
+    
+    tag = create_tag(build_number, build_type)
+    changelog = create_change_log(tag)
+    print_message("Change Logs: #{changelog}")
+    
     ensure_git_status_clean
-    commit = last_git_commit
     build_number = do_increment_build_number(xcodeproj)
     build_app(
       project: xcodeproj,
       scheme: scheme
     )
-    tag = create_tag(build_number, build_type)
-    changelog = create_change_log(tag)
-    puts "CHANGELOG: #{changelog}"
     upload_to_testflight(
       changelog: changelog,
       skip_waiting_for_build_processing: false,
       reject_build_waiting_for_review: true
     )
-    build_type = 'beta'
     commit_and_push(xcodeproj, build_number, tag)
       # upload_to_app_store(
     #   force: true,
