@@ -18,10 +18,6 @@ def next_build_number(xcodeproj)
     get_build_number(xcodeproj: xcodeproj).to_i, 
     latest_testflight_build_number
   ].max + 1
-end 
-
-def create_tag(build_number, build_type)
-  build_type == 'prod' ? "v#{build_number}" : "v#{build_number}-#{build_type}"
 end
 
 def commit_and_push(xcodeproj, build_number, tag)
@@ -32,7 +28,7 @@ def commit_and_push(xcodeproj, build_number, tag)
   )
   add_git_tag(tag: tag)
   branch_name = git_branch
-  puts "Pushing to remote_branch: #{branch_name}"
+  print_message "Pushing to remote_branch: #{branch_name}"
   push_to_git_remote(
     local_branch: "HEAD",
     remote_branch: branch_name
@@ -52,10 +48,19 @@ def print_message(message)
   puts "\n"
 end
 
-schemes = {
-  "debug" => "Try-Travis-Debug",
-  "beta" => "Try-Travis-Beta",
-  "release" => "Try-Travis-Release"
+configs = {
+  :debug => {
+    :scheme => "Try-TravisCI-Debug",
+    :create_tag => -> (build_number) { "v#{build_number}-debug" }
+  },
+  :beta => {
+    :scheme => "Try-TravisCI-Beta",
+    :create_tag => -> (build_number) { "v#{build_number}-beta" }
+  },
+  :prod => {
+    :scheme => "Try-TravisCI-Release",
+    :create_tag => -> (build_number) { "v#{build_number}" }
+  }
 }
 
 xcodeproj = ENV["XCODE_PROJECT"]
@@ -66,11 +71,10 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     print_message("Stage beta")
-    scheme = schemes('beta')
-    build_type = 'beta'
+    config = configs[:beta]
     
     build_number = next_build_number(xcodeproj)
-    tag = create_tag(build_number, build_type)
+    tag = config[:create_tag].call(build_number)
     changelog = create_change_log(tag)
     print_message("Change Logs: #{changelog}")
     
@@ -81,7 +85,7 @@ platform :ios do
     )
     build_app(
       project: xcodeproj,
-      scheme: scheme
+      scheme: config[:scheme]
     )
     upload_to_testflight(
       changelog: changelog,
@@ -112,6 +116,6 @@ platform :ios do
 
   lane :test do
     print_message("Stage test")
-    run_tests(scheme: scheme)
+    run_tests(scheme: configs[:debug][:scheme])
   end
 end
