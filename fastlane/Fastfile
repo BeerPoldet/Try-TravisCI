@@ -1,11 +1,9 @@
 import("./Configfile")
 
-def next_build_number(xcodeproj, app_identifier)
+def next_build_number(xcodeproj)
   build_number = [
     get_build_number(xcodeproj: xcodeproj).to_i, 
-    latest_testflight_build_number(
-      app_identifier: app_identifier
-    )
+    latest_testflight_build_number
   ].max + 1
 end
 
@@ -46,9 +44,8 @@ platform :ios do
   lane :beta do
     print_message("Stage beta")
     config = @configs[:beta]
-    app_identifier = config[:app_identifier]
     
-    build_number = next_build_number(xcodeproj, app_identifier)
+    build_number = next_build_number(xcodeproj)
     tag = config[:create_tag].call(build_number)
     changelog = create_change_log(tag)
     print_message("Change Logs: #{changelog}")
@@ -67,7 +64,6 @@ platform :ios do
       }
     )
     upload_to_testflight(
-      app_identifier: app_identifier,
       changelog: changelog,
       skip_waiting_for_build_processing: false,
       reject_build_waiting_for_review: true

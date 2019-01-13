@@ -1,7 +1,4 @@
 @configs = {
-  :apple_id => "poldet.bot@gmail.com",
-  :itc_team_id => "118399152",
-  :team_id => "F6395XL53N",
   :debug => {
     :scheme => "Try-TravisCI-Debug",
     :app_identifier => "assanee.try.travisci.debug",
