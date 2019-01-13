@@ -1,17 +1,4 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
+import("./Config")
 
 def next_build_number(xcodeproj)
   build_number = [
@@ -47,29 +34,6 @@ def print_message(message)
   puts "################################################"
   puts "\n"
 end
-
-configs = {
-  :debug => {
-    :scheme => "Try-TravisCI-Debug",
-    :app_identifier => "assanee.try.travisci.debug",
-    :create_tag => -> (build_number) { "v#{build_number}-debug" }
-  },
-  :beta => {
-    :scheme => "Try-TravisCI-Beta",
-    :app_identifier => "assanee.try.travisci.beta",
-    :create_tag => -> (build_number) { "v#{build_number}-beta" }
-  },
-  :prod => {
-    :scheme => "Try-TravisCI-Release",
-    :app_identifier => "assanee.try.travisci.release",
-    :create_tag => -> (build_number) { "v#{build_number}" }
-  },
-  :provisioningProfiles => { 
-    "assanee.try.travisci.debug" => "TryTravisCI",
-    "assanee.try.travisci.beta" => "TryTravisCI",
-    "assanee.try.travisci.release" => "TryTravisCI"
-  }
-}
 
 xcodeproj = ENV["XCODE_PROJECT"]
 
