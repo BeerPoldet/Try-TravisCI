@@ -1,4 +1,4 @@
-require("Config")
+import("./Config")
 
 def next_build_number(xcodeproj)
   build_number = [
