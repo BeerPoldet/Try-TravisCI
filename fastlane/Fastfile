@@ -45,7 +45,7 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     print_message("Stage beta")
-    config = configs[:beta]
+    config = @configs[:beta]
     app_identifier = config[:app_identifier]
     
     build_number = next_build_number(xcodeproj, app_identifier)
@@ -63,7 +63,7 @@ platform :ios do
       scheme: config[:scheme],
       export_options: {
         method: "app-store",
-        provisioningProfiles: configs[:provisioningProfiles]
+        provisioningProfiles: @configs[:provisioningProfiles]
       }
     )
     upload_to_testflight(
@@ -96,7 +96,7 @@ platform :ios do
 
   lane :test do
     print_message("Stage test")
-    config = configs[:debug]
+    config = @configs[:debug]
     run_tests(scheme: config[:scheme])
   end
 end

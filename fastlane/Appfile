@@ -1,18 +1,20 @@
-apple_id("poldet.bot@gmail.com")
+import("./Configfile")
 
-itc_team_id("118399152") # App Store Connect Team ID
-team_id("F6395XL53N") # Developer Portal Team ID
+apple_id(@configs[:apple_id])
 
-# for_platform :ios do
-#   for_lane :beta do
-#     app_identifier(configs[:beta][:app_identifier])
-#   end
+itc_team_id(@configs[:apple_id]) # App Store Connect Team ID
+team_id(@configs[:apple_id]) # Developer Portal Team ID
 
-#   for_lane :prod do
-#     app_identifier(configs[:release][:app_identifier])
-#   end
+for_platform :ios do
+  for_lane :beta do
+    app_identifier(@configs[:beta][:app_identifier])
+  end
 
-#   for_lane :test do
-#     app_identifier(configs[:debug][:app_identifier])
-#   end
-# end
+  for_lane :prod do
+    app_identifier(@configs[:release][:app_identifier])
+  end
+
+  for_lane :test do
+    app_identifier(@configs[:debug][:app_identifier])
+  end
+end

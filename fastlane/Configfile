@@ -1,4 +1,4 @@
-configs = {
+@configs = {
   :debug => {
     :scheme => "Try-TravisCI-Debug",
     :app_identifier => "assanee.try.travisci.debug",
