@@ -1,4 +1,4 @@
-import("./Config")
+import("./Configfile")
 
 apple_id(configs[:apple_id])
 
