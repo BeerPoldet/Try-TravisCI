@@ -1,4 +1,4 @@
-require_relative("Config")
+require("Config")
 
 apple_id(configs[:apple_id])
 
