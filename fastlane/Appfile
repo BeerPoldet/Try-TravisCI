@@ -1,4 +1,3 @@
-app_identifier("assanee.try.travisci") # The bundle identifier of your app
 apple_id("poldet.bot@gmail.com") # Your Apple email address
 
 itc_team_id("118399152") # App Store Connect Team ID

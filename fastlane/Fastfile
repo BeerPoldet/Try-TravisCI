@@ -81,6 +81,7 @@ platform :ios do
     print_message("Stage beta")
     config = configs[:beta]
     
+    app_identifier(config[:app_identifier])
     build_number = next_build_number(xcodeproj)
     tag = config[:create_tag].call(build_number)
     changelog = create_change_log(tag)
@@ -100,7 +101,6 @@ platform :ios do
       }
     )
     upload_to_testflight(
-      app_identifier: config[:app_identifier],
       changelog: changelog,
       skip_waiting_for_build_processing: false,
       reject_build_waiting_for_review: true
@@ -129,6 +129,8 @@ platform :ios do
 
   lane :test do
     print_message("Stage test")
-    run_tests(scheme: configs[:debug][:scheme])
+    config = configs[:debug]
+    app_identifier(config[:app_identifier])
+    run_tests(scheme: config[:scheme])
   end
 end
