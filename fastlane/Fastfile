@@ -45,7 +45,6 @@ platform :ios do
     print_message("Stage beta")
     config = configs[:beta]
     
-    app_identifier(config[:app_identifier])
     build_number = next_build_number(xcodeproj)
     tag = config[:create_tag].call(build_number)
     changelog = create_change_log(tag)
@@ -94,7 +93,6 @@ platform :ios do
   lane :test do
     print_message("Stage test")
     config = configs[:debug]
-    app_identifier(config[:app_identifier])
     run_tests(scheme: config[:scheme])
   end
 end
