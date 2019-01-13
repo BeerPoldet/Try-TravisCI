@@ -63,8 +63,8 @@ platform :ios do
         provisioningProfiles: @configs[:provisioningProfiles]
       }
     )
+    set_changelog(changelog: changelog)
     upload_to_testflight(
-      changelog: changelog,
       skip_waiting_for_build_processing: false,
       reject_build_waiting_for_review: true
     )
